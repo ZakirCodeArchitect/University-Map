@@ -22,6 +22,7 @@ mongoose.connect(Mongo_DB_URL)
     console.log(`Failed to connect MongoDB ${error.message}`)
 });
 
+
 // routing 
 app.use("/universities", universityRoute)
 
