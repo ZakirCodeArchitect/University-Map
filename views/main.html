@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Universities From across the World</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Search Universities from across the World</h1>
+
+    <!-- Search by Country Form -->
+    <form action="javascript:void(0)" method="GET" id="countryForm">
+        <label for="country">Enter name of the country: </label>
+        <input
+            type="text"
+            id="country"
+            name="country"
+            placeholder="e.g Pakistan"
+            required
+        />
+        <button type="submit">View Universities</button>
+    </form>
+
+    <br>
+
+    <!-- Search by University Name Form -->
+    <form action="javascript:void(0)" method="GET" id="universityForm">
+        <label for="name">Enter name of the University: </label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="e.g Engineering Institute of Technology"
+            required
+        />
+        <button type="submit">Search University</button>
+    </form>
+
+    <!-- <pre id="jsonResults"></pre> -->
+    
+    <script>
+        // Handle Country Form Submission
+        const countryForm = document.getElementById('countryForm');
+        countryForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from reloading the page
+
+            const country = document.getElementById('country').value.trim().replace(/\s+/g, '%20');
+            
+            // Redirect the user to the appropriate country endpoint
+            window.location.href = `/${country}`;
+        });
+
+        // Handle University Name Form Submission
+        const universityForm = document.getElementById('universityForm');
+        universityForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            const name = document.getElementById('name').value.trim().replace(/\s+/g, '%20');
+            
+            // Redirect to the university endpoint with encoded name
+            window.location.href = `/university/${name}`;
+        });
+    </script>
+    
+</body>
+</html>

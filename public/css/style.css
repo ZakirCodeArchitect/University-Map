@@ -1,0 +1,103 @@
+/* Reset default styles for the page */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Console", monospace;
+}
+
+/* Background for the body and general styling */
+body {
+  background-color: #f4f7fc;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Header */
+h1 {
+  font-size: 36px;
+  color: #4e4e4e;
+  margin-bottom: 30px;
+}
+
+/* Form Container */
+form {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Input fields */
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #9c5968;
+  outline: none;
+}
+
+/* Buttons */
+button[type="submit"] {
+  background-color: #9c5968;
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+  background-color: #590c2a;
+}
+
+/* Preformatted text for the results */
+pre {
+  margin-top: 30px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  color: #333;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Responsive Styling for smaller screens */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  form {
+    padding: 25px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+}
