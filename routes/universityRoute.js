@@ -7,7 +7,8 @@ router.get("/universities", universityController.getAllUniversities);
 router.get("/store", universityController.getAllUniversities);
 router.get("/university/:name", universityController.getUniversityData);
 
-router.get("/capital", universityController.fetchCapitalUniversity)   // find universities in capitals of country 
+router.get("/capital", universityController.fetchCapitalUniversity)   // find universities in capitals of country
+router.get("/university/state", universityController.fetchCapitalUniversitySeparate); //find universities in capital from separate collections, 
 router.post("/addUniversities",universityController.addUniversity)   // Add a university
 router.put("/:name", universityController.updateUniversity)   // update information for university
 router.delete("/:deleteUniversity", universityController.deleteUniversity) // delete university

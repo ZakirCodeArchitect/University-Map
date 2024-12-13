@@ -188,6 +188,37 @@ const fetchCapitalUniversity = async (req, res) => {
     }
 };
 
+// from gpt
+const fetchCapitalUniversitySeparate = async (req, res) => {
+    const results = {}
+    const capitals = [
+        "Islamabad",
+        "tehran"
+    ]
+
+    try {
+        for (const [country, capital] of capitals) {
+            const collectionName = `${country}s`; // Form collection name
+            const University = mongoose.connection.collection(collectionName);
+
+            // Fetch universities in the capital
+            const universities = await University.find({ state_province: capital }).toArray();
+            results[country] = universities;
+        }
+
+        res.status(200).json({
+            message: "Universities in capitals of the five countries",
+            data: results,
+        });
+
+    } catch (error) {
+        console.error(`Error Fetching universities of capitals for this country: ${country}`, error.message);
+        res.status(500).json({
+            message: "Failed to fetch universities of capitals!",
+        });
+    }
+};
+
 module.exports = {  
     storeAllUniversities, 
     getAllUniversities, 
@@ -195,5 +226,6 @@ module.exports = {
     addUniversity, 
     deleteUniversity,
     updateUniversity,
-    fetchCapitalUniversity 
+    fetchCapitalUniversity,
+    fetchCapitalUniversitySeparate 
 };
