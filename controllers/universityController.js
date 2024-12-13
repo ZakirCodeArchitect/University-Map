@@ -91,6 +91,109 @@ const getUniversityData = async (req, res) => {
       });
     }
   };
-  
 
-module.exports = {  storeAllUniversities, getAllUniversities, getUniversityData };
+const addUniversity = async (req, res) => {
+    
+    const universities = [
+        {name: "Qau", state: "Islamabad",country: "Pakistan", website: "https://qau.edu.pk/", domain: "qau.edu.pk" },
+        {name: "Nust", state: "Islamabad",country: "Pakistan", website: "https://nust.edu.pk/", domain: "nust.edu.pk" },
+        {name: "Fast", state: "Islamabad",country: "Pakistan", website: "http://isb.nu.edu.pk/", domain: "nuces.edu.pk" },
+        {name: "GIKI", state: "Swabi",country: "Pakistan", website: "https://giki.edu.pk/", domain: "giki.edu.pk" },
+        {name: "PIEAS", state: "Islamabad",country: "Pakistan", website: "https://www.pieas.edu.pk/", domain: "pieas.edu.pk" }
+    ]
+
+    try {
+        await University.insertMany(universities);
+        res.status(200).send('Five universities added successfully')
+
+    } catch (error) {
+      console.error("Error Storing Data for the universities", error.message);
+      res.status(500).json({
+        message: `Failed to store data of the universities.`,
+      });
+    }
+};
+
+const deleteUniversity = async (req, res) => {
+    const { university } = req.params;
+
+    try {
+        await University.findOneAndDelete({university});
+
+        res.status(200).send(`University : ${university} has now been deleted`)
+
+    } catch (error) {
+      console.error("Error Deleting university", error.message);
+      res.status(500).json({
+        message: `Failed to delete university`,
+      });
+    }
+};
+
+const updateUniversity = async (req, res) => {
+    const { name } = req.params;
+    const updateDetails = req.body;
+
+    try {
+        // res.send(name); // -> correct
+        // res.send(updateDetails);   // -> correct
+
+      // Await the query result
+      const updatedUniversityData = await University.findOneAndUpdate(
+        {name: { $regex: new RegExp(name, 'i') }}, // Case-insensitive search
+        updateDetails,
+        { new: true } 
+      );
+  
+      // Check if university data exists
+      if (!updatedUniversityData) {
+        return res.status(404).json({
+          message: "University Not Found!",
+        });
+      }
+      
+      // Respond with the data
+      res.status(200).json({
+        message: "University Data Updated Successfully",
+        data: updatedUniversityData
+      });
+    } catch (error) {
+        console.error("Error updating university:", error.message);
+        res.status(500).json({
+            message: "Failed to update university",
+        });
+    }
+};
+
+const fetchCapitalUniversity = async (req, res) => {
+    const capitals = ["Islamabad", "Mumbai", "tehran", "Buenos Aires", "Berlin"]
+
+    try {
+        const results = {}
+
+        for(const capital of capitals)
+        {
+            results[capital] = await University.find(
+                {state_province: { $regex: new RegExp(capital, 'i') }}
+            )
+        }
+      
+      // Respond with the data
+      res.status(200).json(results);
+    } catch (error) {
+        console.error("Error Fetching universities Data ", error.message);
+        res.status(500).json({
+            message: "Failed to fetch universities data",
+        });
+    }
+};
+
+module.exports = {  
+    storeAllUniversities, 
+    getAllUniversities, 
+    getUniversityData, 
+    addUniversity, 
+    deleteUniversity,
+    updateUniversity,
+    fetchCapitalUniversity 
+};

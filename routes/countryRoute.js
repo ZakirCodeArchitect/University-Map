@@ -10,3 +10,6 @@ router.get("/store/:country", countryController.storecountryUniversities);
 router.get("/", countryController.mainPage)
 
 module.exports = router;
+
+
+

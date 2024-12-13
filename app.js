@@ -13,7 +13,7 @@ const morgan = require('morgan');
 //middleware
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('tiny'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));    // for public pages
 
 // Constants
 const PORT = process.env.PORT || 3001;
@@ -29,9 +29,8 @@ mongoose.connect(Mongo_DB_URL)
 
 
 // routing 
-app.use("/universities", universityRoute)
-app.use("/", countryRoute)
-app.use("/university", universityRoute)
+app.use("/", universityRoute);
+app.use("/", countryRoute);
 
 
 // server
