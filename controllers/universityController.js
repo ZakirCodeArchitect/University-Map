@@ -59,7 +59,7 @@ const storeAllUniversities = async (req, res) => {
 
 }
 
-const getUniversityData = async (req, res) => {
+const getUniversityData = async (req, res) => { 
     const { name } = req.params;
   
     try {

@@ -15,7 +15,6 @@ const countrySchema = new mongoose.Schema({
     timestamps: true
 });
 
-
 const mainPage = async (req, res) => {
     res.sendFile(mainFile)
 }
@@ -90,6 +89,7 @@ const storecountryUniversities = async (req, res) => {
     } catch(error){
         console.log("Error Getting Data", error.message);
         res.status(500).json({message:"Failed to fetch data of the universities"});
+        app.use(errorMiddleware);
     }
 
     
